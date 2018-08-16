@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
+import logging
 import re
-import time
 import subprocess
+import time
 
 
 class ChowFanController:
-    def __init__(self, max_temp=50, min_fan_speed=0, max_fan_speed=7, initial_fan_speed=1, polling_time=10):
+    def __init__(self, max_temp=55, min_fan_speed=0, max_fan_speed=7, initial_fan_speed=1, polling_time=10):
         self.max_temp = max_temp
         self.fan_speed = initial_fan_speed
         self.min_fan_speed = min_fan_speed
@@ -38,6 +39,9 @@ class ChowFanController:
             f.write('level {}'.format(level))
 
     def run(self):
+        logging.basicConfig(level=logging.INFO)
+        logger = logging.getLogger('ChowFanController')
+
         self.set_fan_level(self.fan_speed)
         prev_temp = self.get_max_temp()
 
@@ -56,20 +60,24 @@ class ChowFanController:
                 new_speed -= 1
 
             if new_speed != self.fan_speed:
-                print('Temp: {} - Setting fan level to {}'.format(temp, new_speed))
+                logger.info('Temp: %.2f - Setting fan level to %s', temp, new_speed)
                 self.set_fan_level(new_speed)
                 self.fan_speed = new_speed
             else:
-                print('Temp: {} - Keeping fan level at {}'.format(temp, self.fan_speed))
+                logger.info('Temp: %.2f - Keeping fan level at %s', temp, self.fan_speed)
 
             prev_temp = temp
 
 
-if __name__ == '__main__':
-    controller = ChowFanController(max_temp=55, initial_fan_speed=7)
+def main():
+    controller = ChowFanController()
     try:
         controller.ignore_sensors.append('acpitz-virtual-0')
         controller.run()
     finally:
         print('Reverting fan level to auto')
         controller.set_fan_level('auto')
+
+
+if __name__ == '__main__':
+    main()
