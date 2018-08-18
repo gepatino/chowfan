@@ -17,7 +17,7 @@ The scripts have several default values that made sense for me.
 
 TO DO: Add arguments for all options.
 
-## Requiremnts
+## Requirements
 
 In order to have chowfan working, you must enable writing to the `thinkpad_acpi` controlled proc entry: `/proc/acpi/ibm/fan`.
 To do this, edit or create the file `/etc/modprobe.d/thinkpad_acpi.conf` file, adding the following option:
