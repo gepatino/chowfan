@@ -6,7 +6,7 @@ import time
 
 
 class ChowFanController:
-    def __init__(self, max_temp=55, min_fan_speed=0, max_fan_speed=7, initial_fan_speed=1, polling_time=10):
+    def __init__(self, max_temp=55, min_fan_speed=0, max_fan_speed=7, initial_fan_speed=7, polling_time=10):
         self.max_temp = max_temp
         self.fan_speed = initial_fan_speed
         self.min_fan_speed = min_fan_speed
