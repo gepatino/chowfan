@@ -64,7 +64,7 @@ class ChowFanController:
                 self.set_fan_level(new_speed)
                 self.fan_speed = new_speed
             else:
-                logger.info('Temp: %.2f - Keeping fan level at %s', temp, self.fan_speed)
+                logger.debug('Temp: %.2f - Keeping fan level at %s', temp, self.fan_speed)
 
             prev_temp = temp
 
@@ -72,7 +72,7 @@ class ChowFanController:
 def main():
     controller = ChowFanController()
     try:
-        controller.ignore_sensors.append('acpitz-virtual-0')
+        controller.ignore_sensors.append('acpitz-acpi-0')
         controller.run()
     finally:
         print('Reverting fan level to auto')
