@@ -46,7 +46,7 @@ class FanController:
 
     def refresh_speed(self):
         rpm = self.get_fan_rpm()
-        self.level = self.FAN_SPEED_MAX)
+        self.level = self.FAN_SPEED_MAX
         for level, max_rpm in SPEED_MAP:
             if rpm <= max_rpm:
                 self.level = level
