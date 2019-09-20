@@ -6,16 +6,16 @@ import time
 
 
 DEFAULT_MAX_TEMP = 55
-DEFAULT_POLLING_TIME = 10
+DEFAULT_POLLING_TIME = 5
 SPEED_MAP = (  # (level, max_speed)
     (0, 0),
-    (1, 2200),
+    (1, 2250),
     (2, 3200),
     (3, 3400),
     (4, 3600),
-    (5, 4000),
-    (6, 4500),
-    (7, 5000),
+    (5, 4100),
+    (6, 4400),
+    (7, 4500),
 )
 
 
@@ -46,7 +46,7 @@ class FanController:
 
     def refresh_speed(self):
         rpm = self.get_fan_rpm()
-        # TODO: get a speed number based on fan rpm
+        self.level = self.FAN_SPEED_MAX)
         for level, max_rpm in SPEED_MAP:
             if rpm <= max_rpm:
                 self.level = level
